@@ -4,7 +4,8 @@ After=network.target
 
 [Service]
 Type=simple
-ExecStart=/usr/bin/create_ap --config /etc/create_ap.conf
+ExecStart=/bin/bash -c "/sbin/ip link set wlP2p33s0 up ; /usr/sbin/rfkill unblock all ; /usr/bin/create_ap --config /etc/create_ap.conf"
+ExecStop=/usr/bin/create_ap --fix-unmanaged
 KillSignal=SIGINT
 Restart=on-failure
 RestartSec=5
